@@ -1,0 +1,32 @@
+% Header above the table
+% Header above the table
+\begin{center}
+    \textbf{ {{ table_header_text }} }
+\end{center}
+\vspace{0.2cm} % Add some vertical space
+
+\begin{longtable}{|>{\raggedleft\arraybackslash}p{3cm}|>{\raggedleft\arraybackslash}p{3cm}|>{\raggedleft\arraybackslash}p{3cm}|>{\raggedleft\arraybackslash}p{3cm}|>{\raggedleft\arraybackslash}p{2cm}|}
+\hline
+\textbf{t (°C)} & \textbf{v (m\textsuperscript{3}/kg)} & \textbf{h (kJ/kg)} & \textbf{s (kJ/kg $\cdot$ K)} & \textbf{x} (-) \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{t (°C)} & \textbf{v (m \textsuperscript{3}/kg)} & \textbf{h (kJ/kg)} & \textbf{s (kJ/kg $\cdot$ K)} & \textbf{x} (-) \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+{% for row in table_data %}
+{% for item in row %}
+{{ item }}{% if not loop.last %} & {% endif %}
+{% endfor %} \\
+{% if loop.index == 2 %} \hline {% endif %} % Insert a line after the first two rows
+{% endfor %}
+
+\end{longtable}

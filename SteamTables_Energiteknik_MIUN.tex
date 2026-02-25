@@ -1,0 +1,55 @@
+\documentclass[a4paper]{article}
+\usepackage{booktabs}
+\usepackage[top=1.5cm, bottom=1.7cm, left=1cm, right=1cm]{geometry}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{makecell}
+
+%\documentclass[a4paper,11pt,onecolumn,fleqn]{report}
+% \usepackage[a4paper, total={160mm, 250mm}]{geometry}
+%\usepackage[a4paper, width=150mm, top=25mm, bottom=25mm]{geometry}
+% \usepackage[toc]{glossaries}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+\usepackage{csquotes}
+\usepackage[backend=biber, style=apa]{biblatex}
+\DefineBibliographyStrings{swedish}{bibliography = {Referenser}}
+\addbibresource{referenser.bib}
+% \usepackage{hyphenat}
+% \hyphenation{Mathe-matik wieder-gewinnen forut-bestamnda}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{import}
+\usepackage[fleqn]{amsmath}
+\usepackage{mathabx}
+\usepackage{ltablex}
+\usepackage{tabularx}
+\usepackage{caption}
+\captionsetup{justification=raggedright, singlelinecheck=false, skip=0pt} % Left-align caption
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage[yyyymmdd]{datetime}
+\usepackage{hyperref}
+%\loadglsentries{symboler.tex}
+%\makeglossaries
+%\newglossaryentry{testgl}{name={testgl},description={test glossary}}
+%\newacronym{area}{A}{area m\textsuperscript{2}}
+\author{Olof Björkqvist}
+\title{Ångtabeller för Energiteknik}
+\begin{document}
+\import{./}{title.tex}
+\import{./}{figures.tex}
+\import{./}{steamtables_combined.tex}
+% \maketitle
+%\tableofcontents
+%\setlength\LTleft{0 cm}
+%\import{./}{data.tex}
+%\cleardoublepage
+%\printglossary[title=Symboler, toctitle=Symboler, type=\acronymtype]
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Referenser}
+%\printbibliography
+\end{document}

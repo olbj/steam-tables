@@ -1,0 +1,38 @@
+% Header above the table
+\begin{center}
+    \textbf{ {{ table_header_text }} }
+\end{center}
+\vspace{0.2cm} % Add some vertical space
+
+\begin{longtable}{|>{\raggedleft\arraybackslash}p{1.2cm}|>{\raggedleft\arraybackslash}p{1.8cm}|>{\raggedleft\arraybackslash}p{1.8cm}|>{\raggedleft\arraybackslash}p{1.8cm}|>{\raggedleft\arraybackslash}p{1.5cm}|
+>{\raggedleft\arraybackslash}p{1.5cm}|>{\raggedleft\arraybackslash}p{1.5cm}|>{\raggedleft\arraybackslash}p{1.5cm}|>{\raggedleft\arraybackslash}p{1.5cm}|}
+\hline
+\small \makecell{\textbf{t} \\ (°C} & \small \makecell{\textbf{p} \\ (bar)} 
+& \small \makecell{\textbf{v'} \\ (m\textsuperscript{3}/kg)} & \small \makecell{\textbf{v''} \\ (m\textsuperscript{3}/kg)} 
+& \small \makecell{\textbf{h'} \\ (kJ/kg)} & \small \makecell{\textbf{h\textsubscript{r}} \\ (kJ/kg)} & \small \makecell{\textbf{h''} \\ (kJ/kg)} 
+& \small \makecell{\textbf{s'} \\ (kJ/kg$\cdot$K)} & \small \makecell{\textbf{s''} \\ (kJ/kg$\cdot$K)} \\
+\hline
+\endfirsthead
+
+\hline
+\small \makecell{\textbf{t} \\ (°C} & \small \makecell{\textbf{p} \\ (bar)} 
+& \small \makecell{\textbf{v'} \\ (m\textsuperscript{3}/kg)} & \small \makecell{\textbf{v''} \\ (m\textsuperscript{3}/kg)} 
+& \small \makecell{\textbf{h'} \\ (kJ/kg)} & \small \makecell{\textbf{h\textsubscript{r}} \\ (kJ/kg)} & \small \makecell{\textbf{h''} \\ (kJ/kg)} 
+& \small \makecell{\textbf{s'} \\ (kJ/kg$\cdot$K)} & \small \makecell{\textbf{s''} \\ (kJ/kg$\cdot$K)} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+{% for row in table_data %}
+{% for item in row %}
+{{ item }}{% if not loop.last %} & {% endif %}
+{% endfor %} \\
+%{% if loop.index == 2 %} \hline {% endif %} % Insert a line after the first two rows
+{% endfor %}
+
+\end{longtable}

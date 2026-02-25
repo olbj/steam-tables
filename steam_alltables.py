@@ -1,0 +1,59 @@
+import subprocess
+import os
+
+
+tex_files = ["steam_t.tex", "steam_p.tex", "steam.tex"]
+combined_tex_file = "steamtables_combined.tex"
+combined_pdf_file = "steamtables_combined.pdf"
+
+# Paths to the individual Python scripts
+scripts = ["steam_t.py", "steam_p.py", "steam.py"]
+
+# Execute each script in the specified order
+for script in scripts:
+    print(f"Running {script}...")
+    try:
+        subprocess.run(["python", script], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Error while running {script}: {e}")
+        exit(1)
+
+# LaTeX preamble (ensure it's consistent across all scripts)
+with open("steamtables_preamble.tex", "r") as preamble_file:
+    preamble_content = preamble_file.read()
+
+# Combine the LaTeX content from all files
+combined_content = preamble_content + "\\begin{document}\n"
+
+for tex_file in tex_files:
+    with open(tex_file, "r") as f:
+        # Exclude the document preamble and \begin{document} from the individual files
+        content = f.read()
+        content = content.split("\\begin{document}", 1)[-1]
+        content = content.rsplit("\\end{document}", 1)[0]
+        combined_content += content + "\n\\newpage\n"
+
+combined_content += "\\end{document}\n"
+
+# Write the combined LaTeX content to a new file
+with open(combined_tex_file, "w") as f:
+    f.write(combined_content)
+
+# Compile the combined LaTeX file into a PDF
+try:
+    subprocess.run(["pdflatex", "-interaction=nonstopmode", combined_tex_file], check=True)
+    print(f"✅ PDF generated: {combined_pdf_file}")
+except subprocess.CalledProcessError as e:
+    print("❌ Error during LaTeX compilation")
+    print(e)
+
+# Clean up auxiliary files
+for ext in [".aux", ".log", ".out"]:
+    aux_file = combined_tex_file.replace(".tex", ext)
+    if os.path.exists(aux_file):
+        os.remove(aux_file)
+
+# Optionally remove intermediate LaTeX files
+for tex_file in tex_files:
+    if os.path.exists(tex_file):
+        os.remove(tex_file)
